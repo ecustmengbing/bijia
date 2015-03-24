@@ -38,6 +38,7 @@ public class sqlUtil {
 		  		+"','"+item.getUrl()+"','"+item.getImageUrl()+"','"+item.getDescription()+"')";
 		try {
 			stmt.execute(sql);
+			System.out.println(item.getName()+"已写入数据库");
 		} catch (SQLException e) {
 			System.out.println("写入数据库出错！");
 			e.printStackTrace();
