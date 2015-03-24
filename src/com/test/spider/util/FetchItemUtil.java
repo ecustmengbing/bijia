@@ -73,10 +73,10 @@ public class FetchItemUtil {
 	private	static ArrayList<String> getJDItemCategory(Element doc)
 	{
 		ArrayList<String> itemCategory=new ArrayList<String>();
-        Elements categoryInfo = doc.select("div.breadcrumb");
+        Elements categoryInfo = doc.select("div.breadcrumb").select("a[clstag]");
         for(Element category : categoryInfo)
         {
-        	String itemCategoryInfo=category.select("a[clstag]").text();
+        	String itemCategoryInfo=category.text();
         	if(itemCategoryInfo!=null)
         	{
         		itemCategory.add(itemCategoryInfo);

@@ -38,12 +38,14 @@ public class Item {
 				"来源="+host+" "+
 				"价格="+price+" "+
 				"分类="+catgory+" "+
+				"三级分类="+catFirst+"|"+catSecond+"|"+catThird+" "+
 				"链接="+url+" "+
 				"图片链接="+imageUrl+" "+
 				"描述="+description);
 	}
 	
 	public void adaptCatgory(ArrayList<String> Catgory){
+		setCatgory(Catgory);
 		switch(Catgory.size()){
 		case 0:
 			System.out.println("分类信息为空!");
