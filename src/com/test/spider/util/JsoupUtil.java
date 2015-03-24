@@ -13,6 +13,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.test.spider.mConstants;
+import com.test.spider.mValue;
 import com.test.spider.entity.Item;
 
 public class JsoupUtil {
@@ -52,7 +54,8 @@ public class JsoupUtil {
 	}
 	
 	
-	public static void ExcuteItemQueue(String oneListUrl,SqlUtil mSqlUtil,String table){
+	
+	public static void ExcuteItemQueue(String oneListUrl){
 		//初始化信息，item列表Itemlist，分页div的class，内容列表的div的class
 		int a=1;
 		LinkedBlockingQueue<String> Itemlist=new LinkedBlockingQueue<String>(Integer.MAX_VALUE);
@@ -102,7 +105,11 @@ public class JsoupUtil {
 					if (!BloomFilter.ifNotContainsSet(url)) {
 						Item item =	FetchItemUtil.getJDItemInfo(url);
 //						System.out.print("获取商品："+item.getName()+"\n");
-						mSqlUtil.addItem(item, table);
+						if(mValue.getmSqlUtil()!=null){
+							mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
+						}else{
+							System.out.print("获取数据库实例失败！");
+						}
 					}
 					
 				}
