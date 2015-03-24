@@ -18,12 +18,16 @@ public class SpiderTask implements Task {
 	@Override
 	public void run() {
 		//以下注释html本地保存方法
-//		html = FechUtil.getUrl(url);
-//		FileUtil.toTxt(html);
-//		mMap=JsoupUtil.praseMap(url);
-//		mMap = (LinkedHashMap<String, String>) ListFilter.UrlFilter(mMap, ListFilter.LIST);
+		//html = FechUtil.getUrl(url);
+		//FileUtil.toTxt(html);
 		mQueue=JsoupUtil.praseQueue(url);
-		System.out.println(mQueue);
+		while(!mQueue.isEmpty()){
+			String url=mQueue.poll();
+			if (!BloomFilter.ifNotContainsSet(url)) {
+				JsoupUtil.ExcuteItemQueue(url);
+			}
+			
+		}
 
 	}
 

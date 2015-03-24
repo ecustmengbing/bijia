@@ -1,18 +1,8 @@
 package com.test.spider;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.test.spider.util.SpiderTask;
-import com.test.spider.util.FechUtil;
 
 public class SpiderMain {
 	
