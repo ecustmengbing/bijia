@@ -52,7 +52,7 @@ public class JsoupUtil {
 	}
 	
 	
-	public static void ExcuteItemQueue(String oneListUrl,sqlUtil msqlUtil,String table){
+	public static void ExcuteItemQueue(String oneListUrl,SqlUtil mSqlUtil,String table){
 		//初始化信息，item列表Itemlist，分页div的class，内容列表的div的class
 		int a=1;
 		LinkedBlockingQueue<String> Itemlist=new LinkedBlockingQueue<String>(Integer.MAX_VALUE);
@@ -102,7 +102,7 @@ public class JsoupUtil {
 					if (!BloomFilter.ifNotContainsSet(url)) {
 						Item item =	FetchItemUtil.getJDItemInfo(url);
 //						System.out.print("获取商品："+item.getName()+"\n");
-						msqlUtil.addItem(item, table);
+						mSqlUtil.addItem(item, table);
 					}
 					
 				}

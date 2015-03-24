@@ -6,16 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.test.spider.mValue;
 import com.test.spider.entity.Item;
 
-public class sqlUtil {
+public class SqlUtil {
 	
 	private String dbName;
 	private String userName;
 	private String password;
 	protected Statement stmt;
 	
-	public sqlUtil(String dbName,String userName,String password){
+	public SqlUtil(String dbName,String userName,String password){
 		setDbName(dbName);
 		setUserName(userName);
 		setPassword(password);
@@ -34,11 +35,15 @@ public class sqlUtil {
 	
 	public void addItem(Item item,String table){
 		String sql = "INSERT INTO "+table+"(Iname,Iid,Ihost,Iprice,Ifirst_cat,Isecond_cat,Ithird_cat,Iurl,Iimg_url,Idescription)"
-		  		+ " VALUES('"+item.getName()+"','"+item.getId()+"','"+item.getHost()+"','"+item.getPrice()+"','"+item.getCatFirst()+"','"+item.getCatSecond()+"','"+item.getCatThird()
+		  		+ " VALUES('"+item.getName()+"','"+item.getId()+"','"+item.getHost()+"','"+item.getPrice()+"','"+
+				item.getCatFirst()+"','"+item.getCatSecond()+"','"+item.getCatThird()
 		  		+"','"+item.getUrl()+"','"+item.getImageUrl()+"','"+item.getDescription()+"')";
 		try {
 			stmt.execute(sql);
 			System.out.println(item.getName()+"已写入数据库");
+			if(mValue.getDbState()){
+				mValue.setDbState(false);
+			}
 		} catch (SQLException e) {
 			System.out.println("写入数据库出错！");
 			e.printStackTrace();
@@ -64,6 +69,8 @@ public class sqlUtil {
 		try {
 			stmt.execute(sql);
 			stmt.execute(sql2);
+			System.out.println("数据库已清空！");
+			mValue.setDbState(true);
 		} catch (SQLException e) {
 			System.out.println("删除失败！");
 			e.printStackTrace();

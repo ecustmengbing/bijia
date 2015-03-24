@@ -1,44 +1,40 @@
 package com.test.spider.util;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+
+import com.test.spider.JdSpiderExecuter;
 import com.test.spider.api.Task;
-import com.test.spider.entity.Item;
 
 public class SpiderTask implements Task {
 	private String url;
-	private static String html;
-	private static String table="JDitems";
-	LinkedHashMap<String,String> mMap = new LinkedHashMap<String,String>();
-	LinkedBlockingQueue<String> mQueue = new LinkedBlockingQueue<String>();
 	
-	public SpiderTask(String url,LinkedBlockingQueue<String> urlList){
+	public SpiderTask(String url){
 		this.url=url;
 	}
 	@Override
 	public void run() {
-		//以下注释html本地保存方法
-		//html = FechUtil.getUrl(url);
-		//FileUtil.toTxt(html);
-		mQueue=JsoupUtil.praseQueue(url);
-//		System.out.println("打印网站列表："+mQueue);
-//		Item test = FetchItemUtil.getJDItemInfo("http://item.jd.com/1378541.html");
-//		System.out.println("打印测试信息："+test.toString());
-		sqlUtil msqlUtil = new sqlUtil("spiderDB","root","root");
-//		msqlUtil.addItem(test, "JDitems");
-//		msqlUtil.getAll("JDitems");
-//		msqlUtil.deleteAll("JDitems");
-//		msqlUtil.getAll("JDitems");
-		while(!mQueue.isEmpty()){
-			String url=mQueue.poll();
-			if (!BloomFilter.ifNotContainsSet(url)) {
-				JsoupUtil.ExcuteItemQueue(url,msqlUtil,table);
-			}
-			
-		}
+		dailyTask();
+	}
+	
+	private void dailyTask()
+	{
 
+		int hour=5;
+		int min=0;
+		int sec=0;
+
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, min);
+		calendar.set(Calendar.SECOND, sec);
+		Date time = calendar.getTime();
+
+		Timer timer = new Timer();
+	    timer.schedule(new JdSpiderExecuter(url), time);
 	}
 
 }

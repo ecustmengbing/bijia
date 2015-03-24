@@ -10,8 +10,7 @@ public class SpiderMain {
 	static  String htm_str;
 	static String html;
 	public static void main(String[] args) {
-		final LinkedBlockingQueue<String> urlList = new LinkedBlockingQueue<String>();	//单类商品URL
-		new Thread(new SpiderTask(jdMapUrl,urlList)
+		new Thread(new SpiderTask(jdMapUrl)
 		{}){}.start();
 
 	}
