@@ -29,7 +29,7 @@ public class test {
 		a.add("a3");
 		SpiderModle item = new SpiderModle("1","2","3","4",a,"5","6","7"); 
 		try{
-			SpiderModle.insert(item);
+			item.insert();
 			System.out.println("ok");
 		}catch(SQLException e){
 			System.out.println(e);

@@ -45,9 +45,9 @@ public class SpiderModle {
 		adaptCatgory(catgory);
 	}
 	
-	public static boolean insert(SpiderModle dm) throws SQLException
+	public boolean insert() throws SQLException
 	{
-		return DBOperation.insert(dm);
+		return DBOperation.insert(this);
 	}
 	
 	@Override
