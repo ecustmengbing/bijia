@@ -25,7 +25,7 @@ public class FetchItemUtil {
 		{		
             doc = Jsoup.connect(url).get();
             itemID=getJDItemID(doc);
-            currentItem = new Item(getJDItemName(doc),host,getJDItemID(doc),getJDItemPrice(itemID),
+            currentItem = new Item(getJDItemName(doc),host,itemID,getJDItemPrice(itemID),
             		getJDItemCategory(doc),url,getJDItemImageUrl(doc),getJDItemDetail(doc)
     				);
 		}
@@ -63,7 +63,7 @@ public class FetchItemUtil {
 	//商品价格
 	private	static String getJDItemPrice(String itemID)
 	{
-		String price=FechUtil.getUrl("http://p.3.cn/prices/get?skuid=J_"+itemID+"&tpye=1");
+		String price=new FechUtil().getUrl("http://p.3.cn/prices/get?skuid=J_"+itemID+"&tpye=1");
         price=price.substring(1,price.length()-2);
         JSONObject jsonObject=JSONObject.fromObject(price);
         return jsonObject.get("p").toString();

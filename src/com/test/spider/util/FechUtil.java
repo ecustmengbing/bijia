@@ -10,17 +10,17 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class FechUtil {
 	 static String htm_str;
-	private static HttpClient hc;
+	private HttpClient hc;
 
-	 @SuppressWarnings("deprecation")
-	public static String getUrl(String url){
+	public String getUrl(String url){
 		 try{
-		      hc = new DefaultHttpClient();
+		      hc = HttpClients.createDefault();;
 		      HttpGet hg = new HttpGet(url);
 		      HttpResponse response = hc.execute(hg);
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
