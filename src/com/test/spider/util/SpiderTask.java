@@ -3,6 +3,7 @@ package com.test.spider.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Queue;
 import java.util.Timer;
 
 import com.test.spider.JdSpiderExecuter;
@@ -10,9 +11,10 @@ import com.test.spider.api.Task;
 
 public class SpiderTask implements Task {
 	private String url;
-	
-	public SpiderTask(String url){
+	private Queue<String> queue;
+	public SpiderTask(String url,Queue<String> queue){
 		this.url=url;
+		this.queue = queue;
 	}
 	@Override
 	public void run() {
@@ -34,7 +36,7 @@ public class SpiderTask implements Task {
 		Date time = calendar.getTime();
 
 		Timer timer = new Timer();
-	    timer.schedule(new JdSpiderExecuter(url), time);
+	    timer.schedule(new JdSpiderExecuter(url,queue), time);
 	}
 
 }

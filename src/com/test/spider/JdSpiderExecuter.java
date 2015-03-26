@@ -1,5 +1,6 @@
 package com.test.spider;
 
+import java.util.Queue;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -11,15 +12,16 @@ public class JdSpiderExecuter extends TimerTask {
 	//京东专用爬去线程
 	private String url;
 	private static String table=mConstants.JD_TABLE;
-	LinkedBlockingQueue<String> mQueue = new LinkedBlockingQueue<String>();
+	private Queue<String> mQueue;
 	
-	public JdSpiderExecuter(String url){	
+	public JdSpiderExecuter(String url,Queue<String> mQueue){	
 		this.url=url;
+		this.mQueue = mQueue;
 	}
 	
 	@Override
 	public void run() {
-		mQueue=JsoupUtil.praseQueue(url);			//取得list队列
+//		mQueue=JsoupUtil.praseQueue(url);			//取得list队列
 		if(!mValue.getDbState()&&mValue.getmSqlUtil()!=null){
 			mValue.getmSqlUtil().deleteAll(table);	//清空数据库
 		}

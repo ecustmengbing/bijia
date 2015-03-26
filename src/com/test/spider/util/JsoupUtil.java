@@ -1,6 +1,7 @@
 package com.test.spider.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -37,6 +38,24 @@ public class JsoupUtil {
 	
 	public static LinkedBlockingQueue<String> praseQueue(String url){
 		LinkedBlockingQueue<String> mQueue = new LinkedBlockingQueue<String>();
+		try {
+            Document doc = Jsoup.connect(url).get(); 
+            Elements lists = doc.getElementsByClass("mc");
+            Elements links = lists.select("a[href]"); 
+            for (Element link : links) { 
+            	if(ListFilter.UrlJudge(link.attr("abs:href"), ListFilter.LIST)){
+            		mQueue.add(link.attr("abs:href"));
+            	}
+            }  
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mQueue; 
+	}
+	
+	public static ArrayList<String> praseArray(String url){
+		ArrayList<String> mQueue = new ArrayList<String>();
 		try {
             Document doc = Jsoup.connect(url).get(); 
             Elements lists = doc.getElementsByClass("mc");
