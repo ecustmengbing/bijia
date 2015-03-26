@@ -40,7 +40,7 @@ public class SqlUtil {
 		  		+"','"+item.getUrl()+"','"+item.getImageUrl()+"','"+item.getDescription()+"')";
 		try {
 			stmt.execute(sql);
-			System.out.println(item.getName()+"已写入数据库");
+			System.out.println(++mValue.count+item.getName()+"已写入数据库");
 			if(mValue.getDbState()){
 				mValue.setDbState(false);
 			}
